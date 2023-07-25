@@ -3,19 +3,22 @@ import {
     View,
     Text,
     StyleSheet,
-    Image
+    Image,
+    TouchableOpacity,
 } from 'react-native';
 
-function TodoItem({ id, text, done }) {
+function TodoItem({ id, text, done, onToggle }) {
     return (
         <View style={styles.item}>
-            <View style={[styles.circle, done && styles.filled]}>
-                {done && (
-                    <Image
-                        source={require('../assets/icons/check_white/check_white.png')}
-                    />
-                )}
-            </View>
+            <TouchableOpacity onPress={() => onToggle(id)}>
+                <View style={[styles.circle, done && styles.filled]}>
+                    {done && (
+                        <Image
+                            source={require('../assets/icons/check_white/check_white.png')}
+                        />
+                    )}
+                </View>
+            </TouchableOpacity>
             <Text style={[styles.text, done && styles.lineThrough]}>{text}</Text>
         </View>
     );
@@ -36,9 +39,9 @@ const styles = StyleSheet.create({
         marginRight: 16,
     },
     filled: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#26a69a',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#26a69a',
     },
     text: {
         flex: 1,
@@ -46,8 +49,8 @@ const styles = StyleSheet.create({
         color: '#212121',
     },
     lineThrough: {
-      color: '#9e9e9e',
-      textDecorationLine: 'line-through',
+        color: '#9e9e9e',
+        textDecorationLine: 'line-through',
     },
 });
 
