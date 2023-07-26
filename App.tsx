@@ -35,13 +35,18 @@ function App() {
     setTodos(nextTodos);
   };
 
+  const onRemove = (id: any) => {
+    const nextTodos = todos.filter(todo => todo.id !== id);
+    setTodos(nextTodos);
+  };
+
   return (
     <SafeAreaView style={styles.block}>
       <KeyboardAvoidingView
         behavior={Platform.select({ ios: 'padding' })}
         style={styles.avoid}>
         <DateHead date={today} />
-        {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} />}
+        {todos.length === 0 ? <Empty /> : <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />}
         <AddTodo onInsert={onInsert}/>
       </KeyboardAvoidingView>
     </SafeAreaView>
